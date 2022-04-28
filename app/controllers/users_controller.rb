@@ -1,52 +1,52 @@
 class UsersController < ApplicationController
+  before_action :authorize, except: %i[create index]
+  before_action :set_user, except: %i[create index]
 
   # GET /users
   def index
     @users = User.all
-
-    render json: @users
+    render json: @users, status: :ok
   end
 
-  # GET /users/1
+  # GET /users/{username}
   def show
-    render json: @user
+    render json: @user, status: :ok
   end
-
+ 
   # POST /users
+  # REGISTER
   def create
-    @user = User.new(user_params)
-
-    if @user.save
-      render json: { @user, message: 'User created successfully' }, status: :created, location: @user
+    @user = User.create(user_params)
+    if @user.valid?
+      token = encode_token({user_id: @user.id})
+      render json: { user: @user, jwt: token, message: "User created successfully" }, status: :created
     else
-      render json: { errors: @user.errors }, status: :unprocessable_entity
+      render json: { error: @user.errors }, status: :not_acceptable
     end
   end
 
-  # PATCH/PUT /users/1
+  # PUT /users/{username}
   def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
+    unless @user.update(user_params)
+      render json: { errors: @user.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
-  # DELETE /users/1
+  # DELETE /users/{username}
   def destroy
     @user.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.fetch(:user, {})
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  def set_user
+    @user = User.find_by_username!(params[:_username])
+    rescue ActiveRecord::RecordNotFound
+      render json: { errors: 'User not found' }, status: :not_found
+  end
 
-    end
+  def user_params
+    params.permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
 end
