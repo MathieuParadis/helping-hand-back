@@ -15,8 +15,10 @@ gem 'webpacker'
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
+
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# Bcrypt: A function that uses an algorithm to hash passwords. This is important for user security because if someone were to gain access to your database and the passwords are not hashed the users credentials are compromised.
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -46,8 +48,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Bcrypt: A function that uses an algorithm to hash passwords. This is important for user security because if someone were to gain access to your database and the passwords are not hashed the users credentials are compromised.
-gem 'bcrypt', '~> 3.1.7'
 
 # JWT stands for JSON Web Token. It is a standard for authentication in applications.
 gem 'jwt'
