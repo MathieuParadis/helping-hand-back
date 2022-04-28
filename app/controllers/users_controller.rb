@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     render json: @users, status: :ok
   end
 
-  # GET /users/{email}
+  # GET /users/id
   def show
     render json: @user, status: :ok
   end
@@ -19,7 +19,8 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.valid?
       token = encode_token({user_id: @user.id})
-      render json: { user: @user, jwt: token, message: "User created successfully" }, status: :created
+      render json: { user: @user, message: "Account created successfully" }, status: :created
+      response.set_header('token', token)
     else
       render json: { error: @user.errors }, status: :not_acceptable
     end
@@ -32,20 +33,21 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token, message: "Logged in successfully"}
+      render json: {user: @user, message: "Logged in successfully"}
+      response.set_header('token', token)
     else
       render json: {error: @user.errors}
     end
   end
 
-  # PUT /users/{email}
+  # PUT /users/id
   def update
     unless @user.update(user_params)
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
-  # DELETE /users/{email}
+  # DELETE /users/id
   def destroy
     @user.destroy
   end
@@ -62,5 +64,3 @@ class UsersController < ApplicationController
     params.permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 end
-
-# eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.uVo7u877IT2GEMpB_gxVtxhMAYAJD8W_XiUoNvR7_iM
