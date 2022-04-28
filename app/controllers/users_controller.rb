@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if @user.valid?
       token = encode_token({user_id: @user.id})
       render json: { user: @user, message: "Account created successfully" }, status: :created
-      response.set_header('token', token)
+      response.set_header('jwt_token', token)
     else
       render json: { error: @user.errors }, status: :not_acceptable
     end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
       render json: {user: @user, message: "Logged in successfully"}
-      response.set_header('token', token)
+      response.set_header('jwt_token', token)
     else
       render json: {error: @user.errors}
     end
