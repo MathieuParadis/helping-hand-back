@@ -19,8 +19,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.valid?
       token = encode_token({user_id: @user.id})
-      render json: { user: @user, message: "Account created successfully" }, status: :created
-      response.set_header('jwt_token', token)
+      render json: { user: @user, token: token, message: "Account created successfully" }, status: :created
     else
       render json: { error: @user.errors }, status: :not_acceptable
     end
