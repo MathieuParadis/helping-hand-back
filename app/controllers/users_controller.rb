@@ -33,10 +33,10 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, message: "Logged in successfully"}
+      render json: { user: @user, message: "Logged in successfully" }
       response.set_header('jwt_token', token)
     else
-      render json: {error: @user.errors}
+      render json: { error: "Incorrect email and/or password" }
     end
   end
 
