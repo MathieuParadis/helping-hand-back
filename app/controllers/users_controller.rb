@@ -47,13 +47,17 @@ class UsersController < ApplicationController
 
   # DELETE /users/id
   def destroy
-    @user.destroy
+    if @user.destroy
+      render json: { message: "Account deleted successfully" }
+    else
+      render json: { error: "An error occured. Please try again!" }
+    end
   end
 
   private
 
   def set_user
-    @user = User.find_by_email(params[:email])
+    @user = User.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       render json: { errors: 'User not found' }, status: :not_found
   end
