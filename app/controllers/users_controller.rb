@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorized, except: %i[create index login]
-  before_action :set_user, except: %i[create index]
+  before_action :set_user, except: %i[create login index]
 
   # GET /users
   def index
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   # PUT /users/id
   def update
-    if @user && update(user_params)
+    if @user && @user.update(user_params)
       render json: { user: @user }
     else
       render json: { error: "Something went wrong. Please try again!" }
@@ -65,6 +65,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.permit(:id, :first_name, :last_name, :email, :password, :password_confirmation)
   end
 end
