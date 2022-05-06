@@ -1,21 +1,28 @@
 class PasswordsController < ApplicationController
 
+  # POST /forgotten-password
+  # FORGOTTEN PASSWORD
   def forgot
-    if params[:email].blank? # check if email is present
-      return render json: {error: 'Email not present'}
+    # check if email is present
+    if params[:email].blank? 
+      return render json: {error: 'Email field is empty'}
     end
 
-    user = User.find_by(email: params[:email]) # if present find user by email
+    # if present find user by email
+    user = User.find_by(email: params[:email]) 
 
     if user.present?
-      user.generate_password_token! #generate pass token
+      # generate password token
+      user.generate_password_token! 
       # SEND EMAIL HERE
-      render json: {status: 'ok'}, status: :ok
+      render json: { message: 'An email was sent to your address. Please check your mailbox!'}, status: :ok
     else
       render json: {error: ['Email address not found. Please check and try again.']}, status: :not_found
     end
   end
 
+  # POST /reset-password
+  # RESET PASSWORD
   def reset
     token = params[:token].to_s
 

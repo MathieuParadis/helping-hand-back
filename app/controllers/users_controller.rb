@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     render json: @user, status: :ok
   end
  
-  # POST /users
+  # POST /signup
   # REGISTER
   def create
     @user = User.create(user_params)
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # POST /users
+  # POST /signin
   # LOG IN
   def login
     @user = User.find_by(email: params[:email])
