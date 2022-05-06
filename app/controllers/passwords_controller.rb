@@ -14,7 +14,10 @@ class PasswordsController < ApplicationController
     if user.present?
       # generate password token
       user.generate_password_token! 
-      # SEND EMAIL HERE
+
+      # sends email with link to reset password
+      UserMailer.reset_password_email(user).deliver_now
+
       render json: { message: 'An email was sent to your address. Please check your mailbox!'}, status: :ok
     else
       render json: {error: ['Email address not found. Please check and try again.']}, status: :not_found
