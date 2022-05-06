@@ -1,0 +1,14 @@
+<p>Hi <%= @user.first_name %> <%= @user.last_name %>!</p>
+
+<%# <p>You can confirm your account email through the link below:</p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+Bonjour,
+
+Ceci est un email pour vous confirmer votre inscription à l’application FeedTruck.
+Nous sommes heureux de vous compter parmi nos foodtrucks partenaires et nous espérons que cela marque le début d'une longue belle collaboration entre nous.
+
+Connectez-vous dès maintenant à votre espace foodtruck, via le lien suivant : <%= @url %>.
+
+À très bientôt, l'équipe FeedTruck ! %>

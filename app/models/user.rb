@@ -7,6 +7,18 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: { in: 2..100 }
   validates :email, presence: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }, uniqueness: true
 
+  ## Methods
+  after_create :welcome_send
+  before_destroy :goodbye_send, prepend: true
+
+  def welcome_send
+    UserMailer.welcome_email(self).deliver_now
+  end
+
+  def goodbye_send
+    UserMailer.goodbye_email(self).deliver_now
+  end
+
   def generate_password_token!
     self.reset_password_token = generate_token
     self.reset_password_sent_at = Time.now.utc
