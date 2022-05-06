@@ -28,12 +28,13 @@ class PasswordsController < ApplicationController
   # RESET PASSWORD
   def reset
     user = User.find_by(email: params[:email]) 
+    token = params[:token].to_s
 
     if params[:email].blank?
       return render json: { error: 'Email is missing' }
     end
 
-    if user.present? && user.password_token_valid? && user.reset_password_token == params[:token]
+    if user.present? && user.password_token_valid?
       if user.reset_password!(params[:password])
         render json: { message: 'You successfully reset your password' }, status: :ok
       else
