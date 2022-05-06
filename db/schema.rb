@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2022_04_28_055300) do
     t.string "last_name"
     t.string "email", null: false
     t.string "password_digest", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -3,8 +3,14 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       t.string :first_name
       t.string :last_name
+
+      ## Database authenticatable
       t.string :email,           null: false
       t.string :password_digest, null: false
+
+      ## Recoverable
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
 
       t.timestamps
     end
