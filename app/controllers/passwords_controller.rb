@@ -28,18 +28,21 @@ class PasswordsController < ApplicationController
   # RESET PASSWORD
   def reset
     token = params[:token].to_s
-
-    if params[:email].blank?
-      return render json: {error: 'Token not present'}
-    end
-
     user = User.find_by(reset_password_token: token)
 
+    if params[:email].blank?
+      return render json: {error: 'Email is missing'}
+    end
+
     if user.present? && user.password_token_valid?
-      if user.reset_password!(params[:password])
-        render json: {message: 'You successfully reset your password'}, status: :ok
+      if params[:email] == user.email
+        if user.reset_password!(params[:password])
+          render json: {message: 'You successfully reset your password'}, status: :ok
+        else
+          render json: {error: user.errors.full_messages}, status: :unprocessable_entity
+        end
       else
-        render json: {error: user.errors.full_messages}, status: :unprocessable_entity
+        render json: {error: 'Invalid email'}, status: :ok
       end
     else
       render json: {error:  ['Link not valid or expired. Try generating a new link.']}, status: :not_found
