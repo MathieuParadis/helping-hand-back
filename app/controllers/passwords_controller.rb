@@ -5,7 +5,7 @@ class PasswordsController < ApplicationController
   def forgot
     # check if email is present
     if params[:email].blank? 
-      return render json: {error: 'Email field is empty'}
+      return render json: { error: 'Email field is empty' }
     end
 
     # if present find user by email
@@ -20,34 +20,28 @@ class PasswordsController < ApplicationController
 
       render json: { message: 'An email was sent to your address. Please check your mailbox!'}, status: :ok
     else
-      render json: {error: ['Email address not found. Please check and try again.']}, status: :not_found
+      render json: { error: 'Email address not found. Please check and try again.' }, status: :not_found
     end
   end
 
   # POST /reset-password
   # RESET PASSWORD
   def reset
-    token = params[:token].to_s
-    user = User.find_by(reset_password_token: token)
+    user = User.find_by(email: params[:email]) 
 
     if params[:email].blank?
-      return render json: {error: 'Email is missing'}
+      return render json: { error: 'Email is missing' }
     end
 
     if user.present? && user.password_token_valid?
-      if params[:email] == user.email
-        if user.reset_password!(params[:password])
-          render json: {message: 'You successfully reset your password'}, status: :ok
-        else
-          render json: {error: user.errors.full_messages}, status: :unprocessable_entity
-        end
+      if user.reset_password!(params[:password])
+        render json: { message: 'You successfully reset your password' }, status: :ok
       else
-        render json: {error: 'Invalid email'}, status: :ok
+        render json: { error: 'Something went wrong. Please try again' }, status: :unprocessable_entity
       end
     else
-      render json: {error:  ['Link not valid or expired. Try generating a new link.']}, status: :not_found
+
+      render json: { error: 'User not found. Verify the email address is correct or try generating a new link' }, status: :not_found
     end
   end
-
-
 end
