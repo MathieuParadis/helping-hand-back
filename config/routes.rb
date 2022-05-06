@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   resources :users, except: :create
   post 'signup' => 'users#create'
   post 'signin' => 'users#login'
-  post 'forgotten-password' => 'password#forgot'
-  post 'reset-password' => 'password#reset'
+  post 'forgotten-password' => 'passwords#forgot'
+  post 'reset-password' => 'passwords#reset'
 end
