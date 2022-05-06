@@ -40,7 +40,6 @@ class PasswordsController < ApplicationController
         render json: { error: 'Something went wrong. Please try again' }, status: :unprocessable_entity
       end
     else
-
       render json: { error: 'User not found. Verify the email address is correct or try generating a new link' }, status: :not_found
     end
   end
