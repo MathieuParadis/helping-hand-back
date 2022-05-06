@@ -33,7 +33,7 @@ class PasswordsController < ApplicationController
       return render json: { error: 'Email is missing' }
     end
 
-    if user.present? && user.password_token_valid?
+    if user.present? && user.password_token_valid? && user.reset_password_token == params[:token]
       if user.reset_password!(params[:password])
         render json: { message: 'You successfully reset your password' }, status: :ok
       else
