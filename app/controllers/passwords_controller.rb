@@ -30,6 +30,9 @@ class PasswordsController < ApplicationController
     user = User.find_by(email: params[:email]) 
     token = params[:token].to_s
 
+    p "token"
+    p token
+    p ""
     if params[:email].blank?
       return render json: { error: 'Email is missing' }
     end
