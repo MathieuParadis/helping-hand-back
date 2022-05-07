@@ -16,7 +16,20 @@ class UsersController < ApplicationController
   # POST /signup
   # REGISTER
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
+    
+    p "                                 "
+    p "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+    p @user
+    p @user.id_card_url = @user.get_id_card_url()
+
+    @user.save
+
+
+    p "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+    p "                                 "
+
+
     if @user.valid?
       token = encode_token({user_id: @user.id})
       render json: { user: @user, token: token, message: "Account created successfully" }, status: :created
@@ -65,6 +78,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:id, :first_name, :last_name, :id_card, :email, :password, :password_confirmation)
+    params.permit(:id, :first_name, :last_name, :id_card, :id_card_url, :email, :password, :password_confirmation)
   end
 end
