@@ -1,15 +1,23 @@
 class User < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   # Relations
   has_secure_password
+  has_one_attached :id_card
 
   # Validations
   validates :first_name, presence: true, length: { in: 2..100 }
   validates :last_name, presence: true, length: { in: 2..100 }
   validates :email, presence: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }, uniqueness: true
+  validates :id_card, presence: true
 
   ## Methods
   after_create :welcome_send
   before_destroy :goodbye_send, prepend: true
+
+  def get_id_card_url
+    url_for(self.id_card)
+  end
 
   def welcome_send
     UserMailer.welcome_email(self).deliver_now

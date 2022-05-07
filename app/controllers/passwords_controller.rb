@@ -33,6 +33,9 @@ class PasswordsController < ApplicationController
     p "token"
     p token
     p ""
+    p user.reset_password_token
+    p User.find_by(email: params[:email]) 
+    p User.find_by(token: params[:token]) 
     if params[:email].blank?
       return render json: { error: 'Email is missing' }
     end

@@ -65,6 +65,13 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:id, :first_name, :last_name, :email, :password, :password_confirmation)
+    params.permit(:id, :first_name, :last_name, :id_card, :email, :password, :password_confirmation)
   end
+
+  # if @user.valid?()
+  #   user_serializer = UserSerializer.new()
+  #   render json: user_serializer.id_card()
+  # else
+  #   render json: { errors: "We have a problem Houston" }, status: 400
+  # end
 end

@@ -58,3 +58,5 @@ gem 'bcrypt', '~> 3.1.7'
 
 # JWT stands for JSON Web Token. It is a standard for authentication in applications.
 gem 'jwt'
+
+gem 'active_model_serializers'
