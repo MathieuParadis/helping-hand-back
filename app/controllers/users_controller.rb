@@ -17,20 +17,9 @@ class UsersController < ApplicationController
   # REGISTER
   def create
     @user = User.new(user_params)
-    
-    p "                                 "
-    p "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-    p @user
-    p @user.id_card_url = @user.get_id_card_url()
+    @user.id_card_url = @user.get_id_card_url()
 
-    @user.save
-
-
-    p "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-    p "                                 "
-
-
-    if @user.valid?
+    if @user.save
       token = encode_token({user_id: @user.id})
       render json: { user: @user, token: token, message: "Account created successfully" }, status: :created
     else
@@ -53,7 +42,10 @@ class UsersController < ApplicationController
 
   # PUT /users/id
   def update
-    if @user && @user.update(user_params)
+    @user.attributes = user_params
+    @user.id_card_url = @user.get_id_card_url()
+
+    if @user.save
       render json: { user: @user }
     else
       render json: { error: "Something went wrong. Please try again!" }
