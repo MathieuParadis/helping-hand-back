@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { in: 2..100 }
   validates :last_name, presence: true, length: { in: 2..100 }
   validates :email, presence: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }, uniqueness: true
-  validates :id_card_url, presence: true
+  validates :id_card_url, presence: true, format: { with: /\A[^\s]+(\.(?i)(jpeg|jpg|png|pdf))\z/ }
 
   ## Methods
   after_create :welcome_send
