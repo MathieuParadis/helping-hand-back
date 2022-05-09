@@ -54,4 +54,24 @@ RSpec.describe User, type: :model do
     user = FactoryBot.build(:user, id_card_url: "")
     expect(user).to_not be_valid
   end
+
+  it "is valid with png file" do # simulates the case by changing id_card_url
+    user = FactoryBot.build(:user, id_card_url: "spec/files/IDcard.png")
+    expect(user).to be_valid
+  end
+
+  it "is valid with jpg file" do # simulates the case by changing id_card_url
+    user = FactoryBot.build(:user, id_card_url: "spec/files/IDcard.jpg")
+    expect(user).to be_valid
+  end
+
+  it "is valid with pdf file" do # simulates the case by changing id_card_url
+    user = FactoryBot.build(:user, id_card_url: "spec/files/IDcard.pdf")
+    expect(user).to be_valid
+  end
+
+  it "is not valid with file extension other than png | jpg | pdf" do # simulates the case by changing id_card_url
+    user = FactoryBot.build(:user, id_card_url: "spec/files/IDcard.doc")
+    expect(user).to_not be_valid
+  end
 end
