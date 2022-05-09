@@ -18,7 +18,9 @@ class User < ApplicationRecord
   before_destroy :goodbye_send, prepend: true
 
   def get_id_card_url
-    url_for(self.id_card)
+    if(self.id_card)
+      url_for(self.id_card)
+    end
   end
 
   def welcome_send

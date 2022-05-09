@@ -15,7 +15,7 @@
 #                       email: user1.email,
 #                       password: user1.password,
 #                       password_confirmation: user1.password_confirmation,
-#                       # id_card: user1.id_card
+#                       id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.png', 'image/png'),
 #                     }
 #                   }
 #       end
