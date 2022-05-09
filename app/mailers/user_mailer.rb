@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
   def welcome_email(user)
     @user = user
-    @url  = 'https://helpping-hand.herokuapp.com/' 
+    @url  = 'https://helpping-hand.herokuapp.com/signin/' 
     mail(to: @user.email, subject: 'Welcome to Helping Hand')
   end
 
@@ -13,7 +13,6 @@ class UserMailer < ApplicationMailer
 
   def goodbye_email(user)
     @user = user
-    @url  = 'https://helpping-hand.herokuapp.com/' 
     mail(to: @user.email, subject: "That's only a goodbye")
   end
 end

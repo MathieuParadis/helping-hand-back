@@ -1,14 +1,9 @@
-<p>Hi <%= @user.first_name %> <%= @user.last_name %>!</p>
+Hi <%= @user.first_name %> <%= @user.last_name %>!,
 
-<%# <p>You can confirm your account email through the link below:</p>
+Thank you for signing up at Helping Hand.
+We are happy to count you among our users. We hope that is the beginning of a wonderful adventures for you as well as the people you might meet during your journey as a user of our app.
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+Log in right away to your personal space with the following link: <%= @url %>.
 
-Bonjour,
-
-Ceci est un email pour vous confirmer votre inscription à l’application FeedTruck.
-Nous sommes heureux de vous compter parmi nos foodtrucks partenaires et nous espérons que cela marque le début d'une longue belle collaboration entre nous.
-
-Connectez-vous dès maintenant à votre espace foodtruck, via le lien suivant : <%= @url %>.
-
-À très bientôt, l'équipe FeedTruck ! %>
+Cheers,
+The Helping Hand team
