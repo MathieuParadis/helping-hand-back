@@ -15,8 +15,7 @@
 #                       email: user1.email,
 #                       password: user1.password,
 #                       password_confirmation: user1.password_confirmation,
-#                       id_card: user1.id_card,
-#                       id_card_url: user1.id_card_url
+#                       # id_card: user1.id_card
 #                     }
 #                   }
 #       end

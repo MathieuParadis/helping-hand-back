@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   include Rails.application.routes.url_helpers
-
+  include ActiveModel::Validations
+  
   # Relations
   has_secure_password
   has_one_attached :id_card
@@ -9,6 +10,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { in: 2..100 }
   validates :last_name, presence: true, length: { in: 2..100 }
   validates :email, presence: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }, uniqueness: true
+  validates :id_card, file_content_type: { allow: ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] }, if: -> { id_card.attached? }
   validates :id_card_url, presence: true, format: { with: /\A[^\s]+(\.(?i)(jpeg|jpg|png|pdf))\z/ }
 
   ## Methods

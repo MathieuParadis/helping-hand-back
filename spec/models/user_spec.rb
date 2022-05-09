@@ -50,28 +50,34 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
 
-  it "is not valid without id_card_url" do # simulates the case no file has been saved in active storage
-    user = FactoryBot.build(:user, id_card_url: "")
+  it "is not valid without id_card" do # simulated by setting id_card_url to ''
+    user = FactoryBot.build(:user, id_card_url: '' )
     expect(user).to_not be_valid
   end
 
-  it "is valid with png file" do # simulates the case by changing id_card_url
-    user = FactoryBot.build(:user, id_card_url: "spec/files/IDcard.png")
-    expect(user).to be_valid
-  end
-
-  it "is valid with jpg file" do # simulates the case by changing id_card_url
-    user = FactoryBot.build(:user, id_card_url: "spec/files/IDcard.jpg")
-    expect(user).to be_valid
-  end
-
-  it "is valid with pdf file" do # simulates the case by changing id_card_url
-    user = FactoryBot.build(:user, id_card_url: "spec/files/IDcard.pdf")
-    expect(user).to be_valid
-  end
-
-  it "is not valid with file extension other than png | jpg | pdf" do # simulates the case by changing id_card_url
-    user = FactoryBot.build(:user, id_card_url: "spec/files/IDcard.doc")
+  it "is not valid with id_card with the wrong type / extension, only png | jpg | pdf allowed" do
+    user = FactoryBot.build(:user, id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.doc', 'application/doc'))
     expect(user).to_not be_valid
   end
+
+  it "is valid with png file" do
+    user = FactoryBot.build(:user, id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.png', 'image/png'))
+    expect(user).to be_valid
+  end
+
+  it "is valid with jpg file" do
+    user = FactoryBot.build(:user, id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.jpg', 'image/jpg'))
+    expect(user).to be_valid
+  end
+
+  it "is valid with jpeg file" do
+    user = FactoryBot.build(:user, id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.jpeg', 'image/jpeg'))
+    expect(user).to be_valid
+  end
+
+  it "is valid with pdf file" do
+    user = FactoryBot.build(:user, id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.pdf', 'application/pdf'))
+    expect(user).to be_valid
+  end
+
 end
