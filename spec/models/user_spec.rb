@@ -40,14 +40,18 @@ RSpec.describe User, type: :model do
     expect(user).to_not be_valid
   end
 
-  # it "is not valid without IDcard_url" do
-  #   user = FactoryBot.build(:user, id_card_url: nil)
-  #   expect(rider).to_not be_valid
-  # end
+  it "is not valid with password less than 6 characters" do
+    user = FactoryBot.build(:user, password: "toto")
+    expect(user).to_not be_valid
+  end
 
-  # it "is not valid without position" do
-  #   rider = FactoryBot.build(:rider, position: nil)
-  #   expect(rider).to_not be_valid
-  # end
+  it "is not valid with different passwords" do
+    user = FactoryBot.build(:user, password: "tototo", password_confirmation: "momomo")
+    expect(user).to_not be_valid
+  end
 
+  it "is not valid without id_card_url" do # simulates the case no file has been saved in active storage
+    user = FactoryBot.build(:user, id_card_url: "")
+    expect(user).to_not be_valid
+  end
 end
