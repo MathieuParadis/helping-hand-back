@@ -82,4 +82,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Mailer
+  config.action_mailer.perform_deliveries = false
+  config.action_mailer.default_url_options = { :host => "helpping-hand.herokuapp.com" }
 end
