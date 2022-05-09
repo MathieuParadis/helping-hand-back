@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'User registration', type: :request do
-  describe 'POST /create' do
+RSpec.describe 'User login', type: :request do
+  describe 'POST /login' do
 
     context 'with valid parameters' do
       let!(:user1) { FactoryBot.create(:user) }
@@ -41,7 +41,7 @@ RSpec.describe 'User registration', type: :request do
 
       it 'returns user token' do
         token = json['token']
-        expect(token).not_to be(nil)
+        expect(token).to be_present
       end
 
       it 'returns user token' do

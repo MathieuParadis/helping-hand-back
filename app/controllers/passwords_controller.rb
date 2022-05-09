@@ -20,7 +20,7 @@ class PasswordsController < ApplicationController
 
       render json: { message: 'An email was sent to your address. Please check your mailbox!'}, status: :ok
     else
-      render json: { error: 'Email address not found. Please check and try again.' }, status: :not_found
+      render json: { error: 'Email address not found. Please check and try again' }, status: :not_found
     end
   end
 
