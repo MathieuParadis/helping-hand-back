@@ -33,6 +33,11 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email])
 
     if @user && @user.authenticate(params[:password])
+
+      # set up reset password token to nil to avoid to be able to re use same token several times
+      @user.reset_password_token = nil
+      @user.save
+
       token = encode_token({user_id: @user.id})
       render json: { user: @user, token: token, message: "Logged in successfully" }
     else

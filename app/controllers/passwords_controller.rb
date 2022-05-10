@@ -18,7 +18,7 @@ class PasswordsController < ApplicationController
       # sends email with link to reset password
       UserMailer.reset_password_email(user).deliver_now
 
-      render json: { user: user, message: 'An email was sent to your address. Please check your mailbox!'}, status: :ok
+      render json: { message: 'An email was sent to your address. Please check your mailbox!'}, status: :ok
     else
       render json: { error: 'Email address not found. Please check and try again' }, status: :not_found
     end

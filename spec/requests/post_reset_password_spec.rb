@@ -11,17 +11,16 @@ RSpec.describe 'Password reset password', type: :request do
           params: { 
                     email: user1.email
                   }
-        
-        # get user as response returned by passwords#forgot
-        user = json['user']
+
+        user1.reload
 
         post '/reset-password', 
           params: { 
                     email: user1.email,
                     password: "new_password",
-                    token: user['reset_password_token']
+                    token: user1.reset_password_token
                   }
-      end
+        end
 
       # it 'returns error message' do
       #   # message = json['message']

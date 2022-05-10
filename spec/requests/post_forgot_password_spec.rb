@@ -13,11 +13,6 @@ RSpec.describe 'Password forgotten password', type: :request do
                   }
       end
 
-      it 'returns user token' do
-        user = json['user']
-        expect(user['reset_password_token']).to be_present
-      end
-
       it 'returns success code 200' do
         expect(response.status).to eq(200)
       end

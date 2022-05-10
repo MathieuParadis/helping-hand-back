@@ -39,9 +39,19 @@ RSpec.describe 'User login', type: :request do
         expect(user['id_card_url']).to eq(user1.id_card_url)
       end
 
+      it 'reset password token to null' do
+        user = json['user']
+        expect(user['reset_password_token']).to eq(nil)
+      end
+
       it 'returns message upon login' do
         message = json['message']
         expect(message).to eq('Logged in successfully')
+      end
+
+      it 'returns token that identifies a user' do
+        token = json['token']
+        expect(token).to be_present
       end
 
       it 'returns success code 200' do
