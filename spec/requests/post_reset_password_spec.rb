@@ -8,15 +8,18 @@ RSpec.describe 'Password reset password', type: :request do
 
       before do
         post '/forgotten-password', 
-        params: { 
-                  email: user1.email
-                }
+          params: { 
+                    email: user1.email
+                  }
+        
+        # get user as response returned by passwords#forgot
+        user = json['user']
 
         post '/reset-password', 
           params: { 
                     email: user1.email,
                     password: "new_password",
-                    token: user1.reset_password_token
+                    token: user['reset_password_token']
                   }
       end
 
@@ -25,9 +28,9 @@ RSpec.describe 'Password reset password', type: :request do
       #   expect(user1.reset_password_token).to eq('You successfully reset your password')
       # end
      
-      # it 'returns a ok status 200' do
-      #   expect(response).to have_http_status(:ok)
-      # end
+      it 'returns a ok status 200' do
+        expect(response).to have_http_status(:ok)
+      end
     end
 
 
