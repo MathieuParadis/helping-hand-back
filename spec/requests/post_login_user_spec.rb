@@ -39,12 +39,7 @@ RSpec.describe 'User login', type: :request do
         expect(user['id_card_url']).to eq(user1.id_card_url)
       end
 
-      it 'returns user token' do
-        token = json['token']
-        expect(token).to be_present
-      end
-
-      it 'returns user token' do
+      it 'returns message upon login' do
         message = json['message']
         expect(message).to eq('Logged in successfully')
       end
