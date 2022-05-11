@@ -39,7 +39,7 @@ class UsersController < ApplicationController
       @user.save
 
       token = encode_token({user_id: @user.id})
-      render json: { user: @user, token: token, message: "Logged in successfully" }
+      render json: { user: @user, token: token, message: "Logged in successfully" }, status: :ok
     else
       render json: { error: "Incorrect email and/or password" }, status: :unprocessable_entity
     end
@@ -51,18 +51,18 @@ class UsersController < ApplicationController
     @user.id_card_url = @user.get_id_card_url()
 
     if @user.save
-      render json: { user: @user }
+      render json: { user: @user }, status: :ok
     else
-      render json: { error: "Something went wrong. Please try again!" }
+      render json: { error: "Something went wrong. Please try again!" }, status: :unprocessable_entity
     end
   end
 
   # DELETE /users/id
   def destroy
     if @user.destroy
-      render json: { message: "Account deleted successfully" }
+      render json: { message: "Account deleted successfully" }, status: :ok
     else
-      render json: { error: "An error occured. Please try again!" }
+      render json: { error: "An error occured. Please try again!" }, status: :unprocessable_entity
     end
   end
 

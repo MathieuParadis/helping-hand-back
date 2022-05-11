@@ -40,12 +40,30 @@ RSpec.describe 'User registration', type: :request do
 
       it 'returns the id_card_url' do
         user = json['user']
-        expect(user['id_card_url']).to eq(User.last.id_card_url)
+        expect(user['id_card_url']).to be_present
       end
 
       it 'reset password token to null' do
         user = json['user']
         expect(user['reset_password_token']).to eq(nil)
+      end
+
+      it 'returns message upon registration' do
+        message = json['message']
+        expect(message).to eq('Account created successfully')
+      end
+
+      it 'returns token that identifies a user' do
+        token = json['token']
+        expect(token).to be_present
+      end
+
+      it 'returns success code 201' do
+        expect(response.status).to eq(201)
+      end
+
+      it 'returns a created status 201' do
+        expect(response).to have_http_status(:created)
       end
 
     end
