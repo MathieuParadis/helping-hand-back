@@ -17,7 +17,12 @@ class UsersController < ApplicationController
   # REGISTER
   def create
     @user = User.new(user_params)
-    @user.id_card_url = @user.get_id_card_url()
+
+    if @user.id_card
+      @user.id_card_url = @user.get_id_card_url()
+    else
+      render json: { error: 'file missing' }, status: :not_acceptable
+    end
 
     if @user.save
       token = encode_token({user_id: @user.id})

@@ -5,7 +5,7 @@ RSpec.describe 'User registration', type: :request do
 
 
     context 'with valid parameters' do
-      
+
       before do
         post '/signup', 
           params: { 
@@ -36,6 +36,10 @@ RSpec.describe 'User registration', type: :request do
       it 'returns the email' do
         user = json['user']
         expect(user['email']).to eq('jason.statam@gmail.com')
+      end
+
+      it 'expects newly created instance to have id card attached' do
+        expect(User.last.id_card.attached?).to eq(true)
       end
 
       it 'returns the id_card_url' do
@@ -69,7 +73,27 @@ RSpec.describe 'User registration', type: :request do
     end
 
 
+    context 'with invalid parameters: text fields empty' do
+      before do
+        post '/signup', 
+          params: { 
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    password: '',
+                    password_confirmation: '',
+                    id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.png', 'image/png')
+                  }          
+      end
 
+      it 'returns error code 406' do
+        expect(response.status).to eq(406)
+      end
+
+      it 'returns a not acceptable status' do
+        expect(response).to have_http_status(:not_acceptable)
+      end
+    end
 
   end
 end
