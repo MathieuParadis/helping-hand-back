@@ -22,10 +22,14 @@ RSpec.describe 'Password reset password', type: :request do
                   }
         end
 
-      # it 'returns error message' do
-      #   # message = json['message']
-      #   expect(user1.reset_password_token).to eq('You successfully reset your password')
-      # end
+      it 'returns message upon successful request' do
+        message = json['message']
+        expect(message).to eq('You successfully reset your password')
+      end
+  
+      it 'returns success code 200' do
+        expect(response.status).to eq(200)
+      end
      
       it 'returns a ok status 200' do
         expect(response).to have_http_status(:ok)
@@ -33,44 +37,54 @@ RSpec.describe 'Password reset password', type: :request do
     end
 
 
-    # context 'with invalid parameters' do
+    context 'with invalid parameters' do
+      let!(:user1) { FactoryBot.create(:user) }
 
-    #   before do
-    #     post '/reset-password', 
-    #       params: { 
-    #                 email: 'thisemaildoesnotexist@gmail.com'
-    #               }
-    #   end
+      before do
+        post '/forgotten-password', 
+          params: { 
+                    email: user1.email
+                  }
 
-    #   it 'returns error message' do
-    #     error = json['error']
-    #     expect(error).to eq('Email address not found. Please check and try again')
-    #   end
+        user1.reload
 
-    #   it 'returns error code 404' do
-    #     expect(response.status).to eq(404)
-    #   end
+        post '/reset-password', 
+          params: { 
+                    email: 'thisemaildoesnotexist@gmail.com',
+                    password: "new_password",
+                    token: user1.reset_password_token
+                  }
+        end
 
-    #   it 'returns not found status' do
-    #     expect(response).to have_http_status(:not_found)
-    #   end
-    # end
+      it 'returns error message' do
+        error = json['error']
+        expect(error).to eq('User not found. Verify the email address is correct or try generating a new link')
+      end
+
+      it 'returns error code 404' do
+        expect(response.status).to eq(404)
+      end
+
+      it 'returns not found status' do
+        expect(response).to have_http_status(:not_found)
+      end
+    end
     
 
-    # context 'with empty email' do
+    context 'with empty email' do
 
-    #   before do
-    #     post '/reset-password', 
-    #       params: { 
-    #                 email: ''
-    #               }
-    #   end
+      before do
+        post '/reset-password', 
+          params: { 
+                    email: ''
+                  }
+      end
 
-    #   it 'returns error message' do
-    #     error = json['error']
-    #     expect(error).to eq('Email field is empty')
-    #   end
-    # end
+      it 'returns error message' do
+        error = json['error']
+        expect(error).to eq('Email is missing')
+      end
+    end
 
   end
 end

@@ -13,6 +13,11 @@ RSpec.describe 'Password forgotten password', type: :request do
                   }
       end
 
+      it 'returns message upon successful request' do
+        message = json['message']
+        expect(message).to eq('An email was sent to your address. Please check your mailbox!')
+      end
+
       it 'returns success code 200' do
         expect(response.status).to eq(200)
       end
