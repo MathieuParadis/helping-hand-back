@@ -5,7 +5,7 @@ class PasswordsController < ApplicationController
   def forgot
     # check if email is present
     if params[:email].blank? 
-      return render json: { error: 'Email field is empty' }
+      return render json: { error: 'Email field is empty' }, status: :unprocessable_entity
     end
 
     # if present find user by email
@@ -31,7 +31,7 @@ class PasswordsController < ApplicationController
     token = params[:token].to_s
     
     if params[:email].blank?
-      return render json: { error: 'Email is missing' }
+      return render json: { error: 'Email is missing' }, status: :unprocessable_entity
     end
 
     if user.present? && user.password_token_valid? && user.reset_password_token == token

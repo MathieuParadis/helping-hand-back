@@ -84,6 +84,14 @@ RSpec.describe 'Password reset password', type: :request do
         error = json['error']
         expect(error).to eq('Email is missing')
       end
+
+      it 'returns error code 422' do
+        expect(response.status).to eq(422)
+      end
+
+      it 'returns unprocessable entity status' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
 
   end
