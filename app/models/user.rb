@@ -5,6 +5,7 @@ class User < ApplicationRecord
   # Relations
   has_secure_password
   has_one_attached :id_card
+  has_many :requests, dependent: :destroy
 
   # Validations
   validates :first_name, presence: true, length: { in: 2..100 }
