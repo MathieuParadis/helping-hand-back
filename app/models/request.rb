@@ -1,6 +1,9 @@
 class Request < ApplicationRecord
   serialize :position, Hash
 
+  # Relations
+  belongs_to :user
+
   # Validations
   validates :title, presence: true, length: { in: 2..100 }
   validates :type, presence: true
