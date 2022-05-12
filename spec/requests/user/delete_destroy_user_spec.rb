@@ -34,7 +34,7 @@ RSpec.describe 'User delete', type: :request do
     end
 
 
-    context 'with invalid parameters' do
+    context 'with invalid or missing token' do
       let!(:user1) { FactoryBot.create(:user) }
 
       before do
@@ -46,16 +46,15 @@ RSpec.describe 'User delete', type: :request do
         
         token = json['token']
 
-        delete "/users", 
-          headers: { 'Authorization' => "Bearer #{token}" }
+        delete "/users/#{user1.id}" 
       end
 
-      it 'returns error code 422' do
-        expect(response.status).to eq(422)
+      it 'returns error code 401' do
+        expect(response.status).to eq(401)
       end
 
-      it 'returns a unprocessable entity status' do
-        expect(response).to have_http_status(:unprocessable_entity)
+      it 'returns a unauthorized entity status' do
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
