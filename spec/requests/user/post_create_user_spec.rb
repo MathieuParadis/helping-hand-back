@@ -44,7 +44,7 @@ RSpec.describe 'User registration', type: :request do
 
       it 'returns the id_card_url' do
         user = json['user']
-        expect(user['id_card_url']).to be_present
+        expect(user['id_card_url'].split('/').last).to eq('IDcard.png')
       end
 
       it 'reset password token to null' do
@@ -83,6 +83,29 @@ RSpec.describe 'User registration', type: :request do
                     password: '',
                     password_confirmation: '',
                     id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.png', 'image/png')
+                  }          
+      end
+
+      it 'returns error code 406' do
+        expect(response.status).to eq(406)
+      end
+
+      it 'returns a not acceptable status' do
+        expect(response).to have_http_status(:not_acceptable)
+      end
+    end
+
+
+    context 'with invalid parameters: wrong file type' do
+      before do
+        post '/signup', 
+                  params: { 
+                    first_name: "Jason",
+                    last_name: "Statam",
+                    email: "jason.statam@gmail.com",
+                    password: 'azerty123',
+                    password_confirmation: 'azerty123',
+                    id_card: Rack::Test::UploadedFile.new('spec/files/IDcard.doc', 'application/doc')
                   }          
       end
 

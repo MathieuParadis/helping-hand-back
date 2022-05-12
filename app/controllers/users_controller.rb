@@ -55,10 +55,15 @@ class UsersController < ApplicationController
     @user.attributes = user_params
     @user.id_card_url = @user.get_id_card_url()
 
+    if @user.password_confirmation != @user.password
+      render json: { error: "Password and password confirmation are different" }, status: :not_acceptable
+      return
+    end
+
     if @user.save
-      render json: { user: @user }, status: :ok
+      render json: { user: @user, message: "User profile updated succesfully" }, status: :ok
     else
-      render json: { error: "Something went wrong. Please try again!" }, status: :unprocessable_entity
+      render json: { error: "Something went wrong. Please try again!" }, status: :not_acceptable
     end
   end
 
