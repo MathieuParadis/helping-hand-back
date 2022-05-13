@@ -1,9 +1,44 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+p "*" * 50
+p " " * 50
+p "                 STARTING SEEDING                 "
+p " " * 50
+p "*" * 50
 
-User.create(first_name: 'John', last_name: "Do", email: "j.do@gmail.com", password: "totototo", password_confirmation: "totototo")
+p "Destroy curent data..."
+
+p "Destroying requests... #{Request.count} "
+Request.destroy_all
+
+p "Destroying users... #{User.count} "
+User.destroy_all
+
+p "-" * 50
+p "-" * 50
+
+############################################
+users_number = 3
+users_count = 0
+
+requests_number = 10
+requests_count = 0
+
+############################################
+
+# user1 = User.create(first_name: "Gabriel", last_name: "Green", email: "gabriel.green@yopgmail.com", password: "azerty123", password_confirmation: "azerty123").id_card.attach(io: File.open('app/assets/images/IDcard.png'), filename: 'IDcard.png')
+User.new(first_name: "Gabriel", last_name: "Green")
+
+
+# users_count += 1
+# system("clear")
+# puts "#{users_count} users created"
+# puts "|"+("█"*users_count)+(" "*(users_number-users_count))+"|"
+
+
+
+
+
+
+
+puts ""
+puts "Enjoy 🥃 !!!"
+puts "----------->"
