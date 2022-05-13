@@ -5,7 +5,7 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.string :request_type
       t.string :location
       t.decimal :lat
-      t.decimal :lng
+      t.decimal :lgn
       t.text :description
       t.belongs_to :user, index: true
 

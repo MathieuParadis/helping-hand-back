@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2022_05_12_044541) do
     t.string "request_type"
     t.string "location"
     t.decimal "lat"
-    t.decimal "lng"
+    t.decimal "lgn"
     t.text "description"
     t.bigint "user_id"
     t.datetime "created_at", null: false
