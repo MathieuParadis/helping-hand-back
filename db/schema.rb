@@ -38,8 +38,10 @@ ActiveRecord::Schema.define(version: 2022_05_12_044541) do
 
   create_table "requests", force: :cascade do |t|
     t.string "title"
+    t.string "request_type"
     t.string "location"
-    t.string "position"
+    t.decimal "lat"
+    t.decimal "lng"
     t.text "description"
     t.bigint "user_id"
     t.datetime "created_at", null: false
