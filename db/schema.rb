@@ -38,12 +38,13 @@ ActiveRecord::Schema.define(version: 2022_05_12_044541) do
 
   create_table "requests", force: :cascade do |t|
     t.string "title"
-    t.integer "type", default: 0
     t.string "location"
     t.string "position"
     t.text "description"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

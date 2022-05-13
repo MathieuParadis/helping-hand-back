@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
   # POST /requests
   def create
     @request = Request.new(request_params)
-    @request.user = current_user
+    # @request.user = current_user
 
     if @request.save
       render json: @request, status: :created, location: @request
@@ -47,6 +47,6 @@ class RequestsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def request_params
-      params.fetch(:request, {})
+      params.permit(:id, :title, :type, :location, :postion, :description, :user_id)
     end
 end
