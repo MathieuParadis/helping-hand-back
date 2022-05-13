@@ -7,6 +7,8 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.decimal :lat
       t.decimal :lgn
       t.text :description
+      t.string :status, :default => "in progress"
+      t.integer :count, :default => 0
       t.belongs_to :user, index: true
 
       t.timestamps

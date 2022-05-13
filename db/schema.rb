@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 2022_05_12_044541) do
     t.decimal "lat"
     t.decimal "lgn"
     t.text "description"
+    t.string "status", default: "in progress"
+    t.integer "count", default: 0
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
