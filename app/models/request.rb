@@ -10,7 +10,7 @@ class Request < ApplicationRecord
   validates :lgn, presence: true
   validates :description, presence: true, length: { in: 10..300 }
   validates :status, presence: true
-  validates :description, presence: true
+  validates :count, presence: true
 
   # Request_type options
   enum request_type: { material: "material", service: "service" }
