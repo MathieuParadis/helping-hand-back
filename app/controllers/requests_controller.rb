@@ -5,8 +5,14 @@ class RequestsController < ApplicationController
   def index
     @requests = Request.all
 
-    render json: @requests
-  end
+    # if current_user
+    #   render json: @requests, status: :created
+    # else
+    #   render json: { error: "please log in" }, status: :unprocessable_entity
+    # end  
+
+    render json: @requests, status: :created
+end
 
   # GET /requests/1
   def show
@@ -16,7 +22,7 @@ class RequestsController < ApplicationController
   # POST /requests
   def create
     @request = Request.new(request_params)
-    @request.user_id = current_user.id
+    @request.user = current_user
 
     if @request.save
       render json: { message: "Request created successfully" }, status: :created
@@ -43,10 +49,12 @@ class RequestsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_request
       @request = Request.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { errors: 'Request not found' }, status: :not_found
     end
 
     # Only allow a trusted parameter "white list" through.
     def request_params
-      params.permit(:id, :title, :request_type, :location, :lat, :lng, :description, :user_id)
+      params.permit(:id, :title, :request_type, :location, :lat, :lng, :description)
     end
 end
