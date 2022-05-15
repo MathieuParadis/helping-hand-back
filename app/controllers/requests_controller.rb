@@ -12,7 +12,21 @@ class RequestsController < ApplicationController
     # end  
 
     render json: @requests, status: :created
-end
+  end
+
+  # GET /user-requests
+  def index_user_requests
+    @requests = Request.where(user: current_user)
+
+    # if current_user
+    #   render json: @requests, status: :created
+    # else
+    #   render json: { error: "please log in" }, status: :unprocessable_entity
+    # end  
+
+    render json: @requests, status: :created
+    end
+
 
   # GET /requests/1
   def show
