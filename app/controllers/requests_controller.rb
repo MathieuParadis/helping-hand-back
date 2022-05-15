@@ -16,12 +16,12 @@ class RequestsController < ApplicationController
   # POST /requests
   def create
     @request = Request.new(request_params)
-    # @request.user = current_user
+    @request.user_id = current_user.id
 
     if @request.save
-      render json: @request, status: :created, location: @request
+      render json: { message: "Request created successfully" }, status: :created
     else
-      render json: @request.errors, status: :unprocessable_entity
+      render json: { error: @request.errors }, status: :unprocessable_entity
     end
   end
 

@@ -3,12 +3,12 @@ class Request < ApplicationRecord
   belongs_to :user
   
   # Validations
-  validates :title, presence: true, length: { in: 2..50 }
+  validates :title, presence: true, length: { in: 1..50 }
   validates :request_type, presence: true
-  validates :location, presence: true, length: { in: 2..50 }
+  validates :location, presence: true
   validates :lat, presence: true
   validates :lng, presence: true
-  validates :description, presence: true, length: { in: 10..300 }
+  validates :description, presence: true, length: { in: 1..300 }
   validates :status, presence: true
   validates :count, presence: true
 
