@@ -77,6 +77,10 @@ GEM
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
+    geokit (1.13.1)
+    geokit-rails (2.3.2)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -211,6 +215,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   file_validators
+  geokit-rails
   jsonapi-rspec
   jwt
   letter_opener

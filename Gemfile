@@ -62,3 +62,5 @@ gem 'jwt'
 gem 'active_model_serializers'
 
 gem 'file_validators'
+
+gem 'geokit-rails'

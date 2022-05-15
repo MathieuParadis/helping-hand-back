@@ -7,7 +7,7 @@ class Request < ApplicationRecord
   validates :request_type, presence: true
   validates :location, presence: true, length: { in: 2..50 }
   validates :lat, presence: true
-  validates :lgn, presence: true
+  validates :lng, presence: true
   validates :description, presence: true, length: { in: 10..300 }
   validates :status, presence: true
   validates :count, presence: true
@@ -17,5 +17,12 @@ class Request < ApplicationRecord
 
   # Status options
   enum status: { in_progress: "in progress", fulfilled: "fulfilled" }
+
+  # geokit rails
+  acts_as_mappable :default_units => :kms,
+  :default_formula => :sphere,
+  :distance_field_name => :distance,
+  :lat_column_name => :lat,
+  :lng_column_name => :lng
 
 end

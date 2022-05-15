@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2022_05_12_044541) do
     t.string "title"
     t.string "request_type"
     t.string "location"
-    t.decimal "lat"
-    t.decimal "lgn"
+    t.decimal "lat", precision: 5, scale: 2
+    t.decimal "lng", precision: 5, scale: 2
     t.text "description"
     t.string "status", default: "in progress"
     t.integer "count", default: 0
