@@ -9,4 +9,10 @@ class RequestSerializer < ActiveModel::Serializer
   def lng
     object.lng.to_f
   end
+
+  def status
+    # object.split("_").join(" ")
+    # object.class
+    return object.status.split("_").join(" ")
+  end
 end
