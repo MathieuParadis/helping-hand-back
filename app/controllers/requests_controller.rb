@@ -1,17 +1,18 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :update, :destroy]
+  before_action :authorized
 
   # GET /requests
   def index
     @requests = Request.all
 
     # if current_user
-    #   render json: @requests, status: :created
+    #   render json: @requests, status: :ok
     # else
     #   render json: { error: "please log in" }, status: :unprocessable_entity
     # end  
 
-    render json: @requests, status: :created
+    render json: @requests, status: :ok
   end
 
   # GET /user-requests
@@ -19,12 +20,12 @@ class RequestsController < ApplicationController
     @requests = Request.where(user: current_user)
 
     # if current_user
-    #   render json: @requests, status: :created
+    #   render json: @requests, status: :ok
     # else
     #   render json: { error: "please log in" }, status: :unprocessable_entity
     # end  
 
-    render json: @requests, status: :created
+    render json: @requests, status: :ok
     end
 
 
@@ -56,7 +57,11 @@ class RequestsController < ApplicationController
 
   # DELETE /requests/1
   def destroy
-    @request.destroy
+    if @request.destroy
+      render json: { message: "Request deleted successfully" }, status: :ok
+    else
+      render json: { error: "An error occured. Please try again!" }, status: :unprocessable_entity
+    end
   end
 
   private
