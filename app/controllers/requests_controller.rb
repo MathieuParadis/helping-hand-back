@@ -11,7 +11,11 @@ class RequestsController < ApplicationController
 
   # GET /user-requests
   def index_user_requests
-    @requests = Request.where(user: current_user).sort{ |a, b| b.status <=> a.status }.sort{ |a, b| b.created_at <=> a.created_at }
+    in_progress_requests = Request.where(user: current_user, status: "in_progress").sort{ |a, b| b.created_at <=> a.created_at }
+    expired_requests = Request.where(user: current_user, status: "expired").sort{ |a, b| b.updated_at <=> a.updated_at }
+    fulfilled_requests = Request.where(user: current_user, status: "fulfilled").sort{ |a, b| b.updated_at <=> a.updated_at }
+
+    @requests = in_progress_requests + expired_requests + fulfilled_requests
 
     render json: @requests, status: :ok
     end

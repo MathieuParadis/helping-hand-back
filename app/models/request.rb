@@ -16,7 +16,7 @@ class Request < ApplicationRecord
   enum request_type: { material: "material", service: "service" }
 
   # Status options
-  enum status: { in_progress: "in progress", fulfilled: "fulfilled" }
+  enum status: { in_progress: "in progress", fulfilled: "fulfilled", expired: "expired" }
 
   # geokit rails
   acts_as_mappable :default_units => :kms,
