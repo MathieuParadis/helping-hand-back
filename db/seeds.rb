@@ -26,19 +26,19 @@ requests_count = 0
 
 p "Creating users"
 
-User.create(first_name: "Gabriel", last_name: "Green", email: "gabriel.green@yopgmail.com", password: "azerty123", password_confirmation: "azerty123", id_card_url: "IDcard.png").id_card.attach(io: File.open('app/assets/images/IDcard.png'), filename: 'IDcard.png')
+User.create(first_name: "Gabriel", last_name: "Green", email: "gabriel.green@yopgmail.com", password: "azerty123", password_confirmation: "azerty123", id_card_url: "https://github.com/MathieuParadis/helping-hand/blob/main/src/assets/images/IDcard.png").id_card.attach(io: File.open('app/assets/images/IDcard.png'), filename: 'IDcard.png')
 users_count += 1
 system("clear")
 puts "#{users_count} users created"
 puts "|"+("█"*users_count)+(" "*(users_number-users_count))+"|"
 
-User.create(first_name: "Connie", last_name: "Brown", email: "connie.brown@yopgmail.com", password: "azerty123", password_confirmation: "azerty123", id_card_url: "IDcard.png").id_card.attach(io: File.open('app/assets/images/IDcard.png'), filename: 'IDcard.png')
+User.create(first_name: "Connie", last_name: "Brown", email: "connie.brown@yopgmail.com", password: "azerty123", password_confirmation: "azerty123", id_card_url: "https://github.com/MathieuParadis/helping-hand/blob/main/src/assets/images/IDcard.png").id_card.attach(io: File.open('app/assets/images/IDcard.png'), filename: 'IDcard.png')
 users_count += 1
 system("clear")
 puts "#{users_count} users created"
 puts "|"+("█"*users_count)+(" "*(users_number-users_count))+"|"
 
-User.create(first_name: "Melanie", last_name: "Jones", email: "melanie.jones@yopgmail.com", password: "azerty123", password_confirmation: "azerty123", id_card_url: "IDcard.png").id_card.attach(io: File.open('app/assets/images/IDcard.png'), filename: 'IDcard.png')
+User.create(first_name: "Melanie", last_name: "Jones", email: "melanie.jones@yopgmail.com", password: "azerty123", password_confirmation: "azerty123", id_card_url: "https://github.com/MathieuParadis/helping-hand/blob/main/src/assets/images/IDcard.png").id_card.attach(io: File.open('app/assets/images/IDcard.png'), filename: 'IDcard.png')
 users_count += 1
 system("clear")
 puts "#{users_count} users created"
