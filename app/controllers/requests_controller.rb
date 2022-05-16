@@ -1,33 +1,20 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :update, :destroy]
-  before_action :authorized
+  # before_action :authorized
 
   # GET /requests
   def index
-    @requests = Request.all
-
-    # if current_user
-    #   render json: @requests, status: :ok
-    # else
-    #   render json: { error: "please log in" }, status: :unprocessable_entity
-    # end  
+    @requests = Request.where(status: "in_progress")
 
     render json: @requests, status: :ok
   end
 
   # GET /user-requests
   def index_user_requests
-    @requests = Request.where(user: current_user)
-
-    # if current_user
-    #   render json: @requests, status: :ok
-    # else
-    #   render json: { error: "please log in" }, status: :unprocessable_entity
-    # end  
+    @requests = Request.where(user: current_user).sort{ |a, b| b.status <=> a.status }
 
     render json: @requests, status: :ok
     end
-
 
   # GET /requests/1
   def show
@@ -48,8 +35,13 @@ class RequestsController < ApplicationController
 
   # PATCH/PUT /requests/1
   def update
+    if @request.status == "fulfilled"
+      render json: { error: "Request already marked as fulfilled" }, status: :unprocessable_entity
+      return
+    end
+
     if @request.update(request_params)
-      render json: @request
+      render json: { message: "Request updated successfully" }, status: :ok
     else
       render json: @request.errors, status: :unprocessable_entity
     end
@@ -57,6 +49,11 @@ class RequestsController < ApplicationController
 
   # DELETE /requests/1
   def destroy
+    if @request.user != current_user
+      render json: { error: "You do not have the right to perform this action" }, status: :unprocessable_entity
+      return
+    end
+
     if @request.destroy
       render json: { message: "Request deleted successfully" }, status: :ok
     else
@@ -74,6 +71,6 @@ class RequestsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def request_params
-      params.permit(:id, :title, :request_type, :location, :lat, :lng, :description)
+      params.permit(:id, :title, :request_type, :location, :lat, :lng, :description, :status, :count)
     end
 end
