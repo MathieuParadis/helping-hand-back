@@ -11,7 +11,7 @@ class RequestsController < ApplicationController
 
   # GET /user-requests
   def index_user_requests
-    @requests = Request.where(user: current_user).sort{ |a, b| b.status <=> a.status }
+    @requests = Request.where(user: current_user).sort{ |a, b| b.status <=> a.status }.sort{ |a, b| b.created_at <=> a.created_at }
 
     render json: @requests, status: :ok
     end
@@ -36,7 +36,7 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1
   def update
     if @request.status == "fulfilled"
-      render json: { error: "Request already marked as fulfilled" }, status: :unprocessable_entity
+      render json: { error: "Request already marked as fulfilled. It cannot be edited anymore" }, status: :unprocessable_entity
       return
     end
 
@@ -71,6 +71,6 @@ class RequestsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def request_params
-      params.permit(:id, :title, :request_type, :location, :lat, :lng, :description, :status, :count)
+      params.permit(:id, :title, :request_type, :location, :lat, :lng, :description, :status, :count, :created_at)
     end
 end
