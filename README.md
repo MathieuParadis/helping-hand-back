@@ -9,7 +9,7 @@ Helping Hand is a local charity whose mission is to help to build a strong commu
 
 
 ## Helping Hand Frontend:
-* [Git repository](https://github.com/MathieuParadis/helping-hand-back)
+* [Git repository](https://github.com/MathieuParadis/helping-hand)
 * [Production link](https://helpping-hand.herokuapp.com/)
 
 
