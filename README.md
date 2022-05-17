@@ -9,8 +9,8 @@ Helping Hand is a local charity whose mission is to help to build a strong commu
 
 
 ## Helping Hand Frontend:
-* [Git repository](https://github.com/MathieuParadis/boulder-bike-tour)
-* [Production link](https://github.com/MathieuParadis/helping-hand-back)
+* [Git repository](https://github.com/MathieuParadis/helping-hand-back)
+* [Production link](https://helpping-hand.herokuapp.com/)
 
 
 ## How to use it:
@@ -27,7 +27,6 @@ rails db:seed
 rails server
 ```
 Then, access the app in your browser at http://localhost:3000/
-
 
 ### In production:
 End points of the app in production
