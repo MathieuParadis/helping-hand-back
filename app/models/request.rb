@@ -28,7 +28,7 @@ class Request < ApplicationRecord
 
   # Methods
   def is_request_expired
-    if (Time.now > self.expiry_date && self.status != "fulfilled")
+    if (Integer(Time.current.utc) > self.expiry_date && self.status != "fulfilled")
       return true
     else 
       return false

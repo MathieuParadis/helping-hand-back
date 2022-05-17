@@ -12,7 +12,7 @@ class RequestsController < ApplicationController
 
   # GET /user-requests
   def index_user_requests
-    in_progress_requests = Request.where(user: current_user, status: "in_progress").sort{ |a, b| b.created_at <=> a.created_at }
+    in_progress_requests = Request.where(user: current_user, status: "in_progress").sort{ |a, b| b.expiry_date <=> a.expiry_date }
     expired_requests = Request.where(user: current_user, status: "expired").sort{ |a, b| b.updated_at <=> a.updated_at }
     fulfilled_requests = Request.where(user: current_user, status: "fulfilled").sort{ |a, b| b.updated_at <=> a.updated_at }
 
@@ -76,7 +76,7 @@ class RequestsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def request_params
-      params.permit(:id, :title, :request_type, :location, :lat, :lng, :description, :status, :count, :created_at)
+      params.permit(:id, :title, :request_type, :location, :lat, :lng, :description, :status, :count, :expiry_date, :created_at)
     end
 
     # Check the status of the requests and change them to expired if expiry date is passed
