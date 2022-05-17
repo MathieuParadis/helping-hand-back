@@ -4,11 +4,12 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :request_type
       t.string :location
-      t.decimal :lat, precision: 5, scale: 2
-      t.decimal :lng, precision: 5, scale: 2
+      t.decimal :lat, precision: 6, scale: 3
+      t.decimal :lng, precision: 6, scale: 3
       t.text :description
       t.string :status, :default => "in progress"
       t.integer :count, :default => 0
+      t.datetime :expiry_date, :default => Time.now + 86400
       t.belongs_to :user, index: true
 
       t.timestamps

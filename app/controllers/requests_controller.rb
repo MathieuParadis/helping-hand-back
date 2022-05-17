@@ -1,10 +1,11 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :update, :destroy]
   # before_action :authorized
+  before_action :check_status
 
   # GET /requests
   def index
-    @requests = Request.where(status: "in_progress")
+    @requests = Request.where(status: "in_progress").where("count < ?", 5)
 
     render json: @requests, status: :ok
   end
@@ -76,5 +77,15 @@ class RequestsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def request_params
       params.permit(:id, :title, :request_type, :location, :lat, :lng, :description, :status, :count, :created_at)
+    end
+
+    # Check the status of the requests and change them to expired if expiry date is passed
+    def check_status
+      Request.all.each do |request|
+        if request.is_request_expired()
+          request.status = "expired"
+        end
+        request.save
+      end
     end
 end

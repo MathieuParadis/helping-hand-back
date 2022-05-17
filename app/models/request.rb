@@ -11,6 +11,7 @@ class Request < ApplicationRecord
   validates :description, presence: true, length: { in: 1..300 }
   validates :status, presence: true
   validates :count, presence: true
+  validates :expiry_date, presence: true
 
   # Request_type options
   enum request_type: { material: "material", service: "service" }
@@ -18,11 +19,20 @@ class Request < ApplicationRecord
   # Status options
   enum status: { in_progress: "in progress", fulfilled: "fulfilled", expired: "expired" }
 
-  # geokit rails
+  # Geokit rails
   acts_as_mappable :default_units => :kms,
   :default_formula => :sphere,
   :distance_field_name => :distance,
   :lat_column_name => :lat,
   :lng_column_name => :lng
+
+  # Methods
+  def is_request_expired
+    if (Time.now > self.expiry_date && self.status != "fulfilled")
+      return true
+    else 
+      return false
+    end
+  end
 
 end
