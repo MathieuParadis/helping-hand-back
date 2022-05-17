@@ -63,4 +63,8 @@ gem 'active_model_serializers'
 
 gem 'file_validators'
 
+# geolocation
 gem 'geokit-rails'
+
+# AWS
+gem 'aws-sdk-s3'
