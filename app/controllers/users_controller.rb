@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     @user.attributes = user_params
     @user.id_card_url = @user.get_id_card_url()
 
-    if @user.password_confirmation != @user.password
+    if @user.password && @user.password_confirmation != @user.password
       render json: { error: "Password and password confirmation are different" }, status: :not_acceptable
       return
     end
