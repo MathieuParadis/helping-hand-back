@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_one :position, dependent: :destroy
   has_many :requests, dependent: :destroy
 
+  # Allows to update the position through the user
+  accepts_nested_attributes_for :position, update_only: true
+
   # Validations
   validates :first_name, presence: true, length: { in: 2..100 }
   validates :last_name, presence: true, length: { in: 2..100 }
