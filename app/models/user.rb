@@ -5,6 +5,7 @@ class User < ApplicationRecord
   # Relations
   has_secure_password
   has_one_attached :id_card
+  has_one :position, dependent: :destroy
   has_many :requests, dependent: :destroy
 
   # Validations
