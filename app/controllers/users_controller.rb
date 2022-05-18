@@ -52,7 +52,9 @@ class UsersController < ApplicationController
 
   # PUT /users/id
   def update
-    @user.attributes = user_params
+    @user.attributes = user_params.except(:position_attributes)
+    @user.position_attributes = JSON.parse(user_params[:position_attributes])
+
     @user.id_card_url = @user.get_id_card_url()
 
     if @user.password && @user.password_confirmation != @user.password
@@ -85,6 +87,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:id, :first_name, :last_name, :id_card, :id_card_url, :email, :password, :password_confirmation, :position)
+    # params.permit(:id, :first_name, :last_name, :id_card, :id_card_url, :email, :password, :password_confirmation, position_attributes: [:lat, :lng])
+    params.permit(:id, :first_name, :last_name, :id_card, :id_card_url, :email, :password, :password_confirmation, :position_attributes)
   end
 end
