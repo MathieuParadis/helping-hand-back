@@ -22,11 +22,12 @@ class UsersController < ApplicationController
       @user.id_card_url = @user.get_id_card_url()
     else
       render json: { error: 'file missing' }, status: :not_acceptable
+      return
     end
 
     if @user.save
       token = encode_token({user_id: @user.id})
-      render json: { user: @user, token: token, message: "Account created successfully" }, status: :created
+      render json: { user: @user, token: token, message: "Account created successfully" }, include: ['position'], status: :created
     else
       render json: { error: @user.errors }, status: :not_acceptable
     end
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
       @user.save
 
       token = encode_token({user_id: @user.id})
-      render json: { user: @user, token: token, message: "Logged in successfully" }, status: :ok
+      render json: { user: @user, token: token, message: "Logged in successfully" }, include: ['position'], status: :ok
     else
       render json: { error: "Incorrect email and/or password" }, status: :unprocessable_entity
     end
@@ -66,7 +67,7 @@ class UsersController < ApplicationController
     end
 
     if @user.save
-      render json: { user: @user, message: "User profile updated succesfully" }, status: :ok
+      render json: {user: @user, message: "User profile updated succesfully" }, include: ['position'], status: :ok
     else
       render json: { error: "Something went wrong. Please try again!" }, status: :not_acceptable
     end
