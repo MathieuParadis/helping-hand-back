@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   post 'forgotten-password' => 'passwords#forgot'
   post 'reset-password' => 'passwords#reset'
 
-  resources :positions
-
   resources :requests
   get 'user-requests' => 'requests#index_user_requests'
 end

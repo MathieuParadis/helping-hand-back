@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2022_05_18_014340) do
     t.text "description"
     t.string "status", default: "in progress"
     t.integer "count", default: 0
-    t.integer "expiry_date", default: 1652868276
+    t.integer "expiry_date", default: 1653024866
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

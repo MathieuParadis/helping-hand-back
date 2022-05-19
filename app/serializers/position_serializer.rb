@@ -1,3 +1,3 @@
 class PositionSerializer < ActiveModel::Serializer
-  attributes :id, :user
+  attributes :id, :lat, :lng, :user
 end

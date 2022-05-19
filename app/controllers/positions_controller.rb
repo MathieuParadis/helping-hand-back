@@ -16,6 +16,8 @@ class PositionsController < ApplicationController
   # POST /positions
   def create
     @position = Position.new(position_params)
+    @position.user = current_user
+
 
     if @position.save
       render json: @position, status: :created, location: @position
@@ -46,6 +48,6 @@ class PositionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def position_params
-      params.fetch(:position, {})
+      params.permit(:id, :lat, :lng)
     end
 end
