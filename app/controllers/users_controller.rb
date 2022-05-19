@@ -53,7 +53,10 @@ class UsersController < ApplicationController
   # PUT /users/id
   def update
     @user.attributes = user_params.except(:position_attributes)
-    @user.position_attributes = JSON.parse(user_params[:position_attributes])
+
+    if (user_params[:position_attributes])
+      @user.position_attributes = JSON.parse(user_params[:position_attributes])
+    end
 
     @user.id_card_url = @user.get_id_card_url()
 
