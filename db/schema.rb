@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2022_05_18_014340) do
   end
 
   create_table "positions", force: :cascade do |t|
-    t.decimal "lat", precision: 6, scale: 3
-    t.decimal "lng", precision: 6, scale: 3
+    t.decimal "lat", precision: 7, scale: 5
+    t.decimal "lng", precision: 8, scale: 5
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,12 +49,12 @@ ActiveRecord::Schema.define(version: 2022_05_18_014340) do
     t.string "title"
     t.string "request_type"
     t.string "location"
-    t.decimal "lat", precision: 6, scale: 3
-    t.decimal "lng", precision: 6, scale: 3
+    t.decimal "lat", precision: 7, scale: 5
+    t.decimal "lng", precision: 8, scale: 5
     t.text "description"
     t.string "status", default: "in progress"
     t.integer "count", default: 0
-    t.integer "expiry_date", default: 1653294194
+    t.integer "expiry_date", default: 1653304935
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
