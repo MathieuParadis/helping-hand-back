@@ -6,8 +6,8 @@ class Request < ApplicationRecord
   validates :title, presence: true, length: { in: 1..50 }
   validates :request_type, presence: true
   validates :location, presence: true
-  validates :lat, presence: true
-  validates :lng, presence: true
+  validates :lat, presence: true, numericality: { greater_than_or_equal_to: -90, less_than_or_equal_to: 90 }
+  validates :lng, presence: true, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 }
   validates :description, presence: true, length: { in: 1..300 }
   validates :status, presence: true
   validates :count, presence: true
