@@ -3,7 +3,6 @@ class Position < ApplicationRecord
   belongs_to :user
 
   # Validations
-  validates :lat, presence: true
-  validates :lng, presence: true
-
+  validates :lat, presence: true, numericality: { in: -90..90 }
+  validates :lng, presence: true, numericality: { in: -180..180 }
 end

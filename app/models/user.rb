@@ -15,13 +15,19 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { in: 2..100 }
   validates :last_name, presence: true, length: { in: 2..100 }
   validates :email, presence: true, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ }, uniqueness: true
-  # validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
+  validate :password_valid?, on: :update  
   validates :id_card, file_content_type: { allow: ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] }, if: -> { id_card.attached? }
   validates :id_card_url, presence: true, format: { with: /\A[^\s]+(\.(?i)(jpeg|jpg|png|pdf))\z/ }
 
   # Methods
   after_create :welcome_send
   before_destroy :goodbye_send, prepend: true
+
+  def password_valid?
+    errors.add(:password, "password too short") unless
+    self.password == nil || (self.password != nil && self.password.length > 5) 
+  end
 
   def get_id_card_url
     if(self.id_card)
