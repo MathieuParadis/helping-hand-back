@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validate :password_valid?, on: :update  
   validates :id_card, file_content_type: { allow: ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] }, if: -> { id_card.attached? }
   validates :id_card_url, presence: true, format: { with: /\A[^\s]+(\.(?i)(jpeg|jpg|png|pdf))\z/ }
+  validates_associated :position
 
   # Methods
   after_create :welcome_send
