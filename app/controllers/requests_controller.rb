@@ -5,7 +5,11 @@ class RequestsController < ApplicationController
 
   # GET /requests
   def index
+    lat = params[:lat]
+    lng = params[:lng]
+
     @requests = Request.where(status: "in_progress").where("count < ?", 5)
+    @requests = @requests.within(15, :origin => [lat, lng])
 
     render json: @requests, status: :ok
   end
