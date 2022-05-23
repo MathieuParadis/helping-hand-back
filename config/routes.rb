@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'requests/:lat/:lng' => 'requests#index', :constraints => {:lat => /\-?\d+(.\d+)?/, :lng => /\-?\d+(.\d+)?/}
   get 'user-requests' => 'requests#index_user_requests'
 
-  resources :rooms, only: [:index, :create]
+  # action cable
+  resources :chats, only: [:index, :create]
+  resources :messages, only: [:create]
   mount ActionCable.server => '/cable'
 end
