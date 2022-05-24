@@ -4,7 +4,5 @@ class Chat < ApplicationRecord
   belongs_to :requester, class_name: "User"
   belongs_to :volunteer, class_name: "User"
   has_many :messages
-  
-  # Validations
-  validates :title, presence: true
+
 end
