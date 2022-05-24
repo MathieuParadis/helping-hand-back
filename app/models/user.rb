@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_one_attached :id_card
   has_one :position, dependent: :destroy
   has_many :requests, dependent: :destroy
+  has_many :requester_chats, foreign_key: 'requester_id', class_name: "Chat"
+  has_many :volunteer_chats, foreign_key: 'volunteer_id', class_name: "Chat"
 
   # Allows to update the position through the user
   accepts_nested_attributes_for :position, update_only: true

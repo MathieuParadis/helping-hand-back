@@ -39,17 +39,23 @@ ActiveRecord::Schema.define(version: 2022_05_23_001233) do
   create_table "chats", force: :cascade do |t|
     t.string "title"
     t.bigint "request_id"
+    t.bigint "requester_id"
+    t.bigint "volunteer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["request_id"], name: "index_chats_on_request_id"
+    t.index ["requester_id"], name: "index_chats_on_requester_id"
+    t.index ["volunteer_id"], name: "index_chats_on_volunteer_id"
   end
 
   create_table "messages", force: :cascade do |t|
     t.string "content"
     t.bigint "chat_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -70,7 +76,7 @@ ActiveRecord::Schema.define(version: 2022_05_23_001233) do
     t.text "description"
     t.string "status", default: "in progress"
     t.integer "count", default: 0
-    t.integer "expiry_date", default: 1653615075
+    t.integer "expiry_date", default: 1653624036
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
