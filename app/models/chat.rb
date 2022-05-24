@@ -3,4 +3,6 @@ class Chat < ApplicationRecord
   belongs_to :request
   has_many :messages
   
+  # Validations
+  validates :title, presence: true
 end
