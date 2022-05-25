@@ -5,4 +5,10 @@ class Chat < ApplicationRecord
   belongs_to :volunteer, class_name: "User"
   has_many :messages
 
+  # Methods
+  after_create :first_message
+
+  def first_message
+    Message.create(content: "Hello #{self.requester.first_name}", chat: self, user: self.volunteer)
+  end
 end
