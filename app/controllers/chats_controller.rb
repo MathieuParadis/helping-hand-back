@@ -1,7 +1,8 @@
 class ChatsController < ApplicationController
 
   def index
-    chats = Chat.all.sort{ |a, b| b.updated_at <=> a.updated_at }
+    chats = Chat.where(requester: current_user) + Chat.where(volunteer: current_user)
+    chats = chats.sort{ |a, b| b.updated_at <=> a.updated_at }
     render json: chats
 
   end
