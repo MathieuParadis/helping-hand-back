@@ -1,4 +1,10 @@
 class MessagesController < ApplicationController
+
+  def index
+    messages = Message.all
+    render json: messages
+  end
+
   def create
     message = Message.new(message_params)
     chat = Chat.find(message_params[:chat_id])
@@ -14,6 +20,6 @@ class MessagesController < ApplicationController
   private
   
   def message_params
-    params.require(:message).permit(:content, :chat_id)
+    params.require(:message).permit(:content, :chat_id, :user_id)
   end
 end

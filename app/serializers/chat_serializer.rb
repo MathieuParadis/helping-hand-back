@@ -5,4 +5,8 @@ class ChatSerializer < ActiveModel::Serializer
     ActiveModel::SerializableResource.new(object.request,  each_serializer: RequestSerializer)
   end
 
+  def messages
+    ActiveModel::SerializableResource.new(object.messages,  each_serializer: MessageSerializer)
+  end
+
 end
