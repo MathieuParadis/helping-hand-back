@@ -12,22 +12,11 @@ class ChatsController < ApplicationController
   # end
 
   def create
-  
     chat = Chat.new(chat_params)
-    # chat.request = Request.find(params[:request_id])
-
-    p chat.request
-    p chat.requester
-    p chat.volunteer
 
     if chat.save
-      # serialized_data = ActiveModelSerializers::Adapter::Json.new(chatSerializer.new(chat)).serializable_hash
-      # ActionCable.server.broadcast 'chats_channel', serialized_data
-      # head :ok
-
-      # serialized_data = ActiveModelSerializers::Adapter::Json.new(chatSerializer.new(chat)).serializable_hash
-      # ActionCable.server.broadcast 'chats_channel', chat
-      # head :ok
+      serialized_chat = ActiveModel::SerializableResource.new(chat)
+      ActionCable.server.broadcast 'chats_channel', serialized_chat
       render json: chat, status: :created
     end
   end
