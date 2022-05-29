@@ -6,9 +6,13 @@ class Chat < ApplicationRecord
   has_many :messages
 
   # Methods
-  after_create :first_message
+  after_create :first_message, :chat_created
 
   def first_message
     Message.create(content: "Hello #{self.requester.first_name}", chat: self, user: self.volunteer)
+  end
+
+  def chat_created
+    ChatMailer.new_chat_email(self).deliver_now
   end
 end

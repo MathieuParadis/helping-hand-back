@@ -1,0 +1,12 @@
+<h2>Hi <%= @request.user.first_name %> <%= @request.user.last_name %>,</h2>
+
+<p>
+  Your new request <%= @request.title %> is now online and accessible to other users.<br/>
+  You can check it as well, and edit it anytime via your dashboard at the following address:<br/>
+  <%= @url %>
+</p>
+
+<p>
+  Cheers,
+  The Helping Hand team
+</p>

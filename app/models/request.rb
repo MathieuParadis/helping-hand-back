@@ -27,6 +27,13 @@ class Request < ApplicationRecord
   :lng_column_name => :lng
 
   # Methods
+  after_create :request_created
+
+  def request_created
+    RequestMailer.request_created_email(self).deliver_now
+  end
+
+
   def is_request_expired
     if (Integer(Time.current.utc) > self.expiry_date && self.status != "fulfilled")
       return true

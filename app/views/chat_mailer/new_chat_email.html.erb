@@ -1,0 +1,12 @@
+<h2>Hi <%= @chat.requester.first_name %> <%= @chat.requester.last_name %>,</h2>
+
+<p>
+  <%= @chat.volunteer.first_name %> <%= @chat.volunteer.last_name %> contacted you to help you with your request '<%= @chat.requester.first_name %> <%= @chat.request.title %>'.<br/>
+  Get in touch right now by clicking on the following link:<br/>
+  <%= @url %>
+</p>
+
+<p>
+  Cheers,
+  The Helping Hand team
+</p>
