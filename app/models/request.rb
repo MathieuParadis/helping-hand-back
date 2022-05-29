@@ -28,11 +28,23 @@ class Request < ApplicationRecord
 
   # Methods
   after_create :request_created
+  after_create :request_expired, :request_fulfilled
 
   def request_created
     RequestMailer.request_created_email(self).deliver_now
   end
 
+  def request_expired
+    if self.status == "expired"
+      RequestMailer.request_expired_email(self).deliver_now
+    end
+  end
+
+  def request_fulfilled
+    if self.status == "fulfilled"
+      RequestMailer.request_fulfilled_email(self).deliver_now
+    end
+  end
 
   def is_request_expired
     if (Integer(Time.current.utc) > self.expiry_date && self.status != "fulfilled")
