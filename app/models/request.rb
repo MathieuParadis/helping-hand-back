@@ -28,7 +28,7 @@ class Request < ApplicationRecord
 
   # Methods
   after_create :request_created
-  after_create :request_expired, :request_fulfilled
+  after_update :request_expired, :request_fulfilled
 
   def request_created
     RequestMailer.request_created_email(self).deliver_now

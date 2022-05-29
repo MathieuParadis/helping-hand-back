@@ -1,9 +1,9 @@
 <h2>Hi <%= @request.user.first_name %> <%= @request.user.last_name %>,</h2>
 
 <p>
-  Your request <%= @request.title %> is now online and accessible to other users.<br/>
-  You can check it as well, and edit it anytime via your dashboard at the following address:<br/>
-  <%= @url %>
+  Your request '<%= @request.title %>' has expired.<br/>
+  You have the option to seek for help again and republish this request.<br/>
+  To do so, go to 'my requests' page, and click on more option on the said request, and select republish.
 </p>
 
 <p>
