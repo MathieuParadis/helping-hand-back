@@ -9,7 +9,7 @@ class CreateRequests < ActiveRecord::Migration[5.2]
       t.text :description
       t.string :status, :default => "in progress"
       t.integer :count, :default => 0
-      t.integer :expiry_date, :default => Integer(Time.current.utc) + (86400*3)
+      t.integer :expiry_date
       t.belongs_to :user, index: true
 
       t.timestamps

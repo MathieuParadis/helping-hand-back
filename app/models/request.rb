@@ -27,8 +27,13 @@ class Request < ApplicationRecord
   :lng_column_name => :lng
 
   # Methods
+  after_initialize :set_expiry_date
   after_create :request_created
   after_update :request_expired, :request_fulfilled
+
+  def set_expiry_date
+    self.expiry_date ||= Integer(Time.current.utc) + (86400*3)
+  end
 
   def request_created
     RequestMailer.request_created_email(self).deliver_now
