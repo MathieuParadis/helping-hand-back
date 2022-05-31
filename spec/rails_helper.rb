@@ -1,7 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
-require './support/api_helpers'
-require './support/user_helpers'
+require 'support/api_helpers'
+require 'support/user_helpers'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
