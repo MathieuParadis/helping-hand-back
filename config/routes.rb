@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'forgotten-password' => 'passwords#forgot'
   post 'reset-password' => 'passwords#reset'
 
-  resources :requests
+  resources :requests, except: [:show]
   get 'requests/:lat/:lng' => 'requests#index', :constraints => {:lat => /\-?\d+(.\d+)?/, :lng => /\-?\d+(.\d+)?/}
   get 'user-requests' => 'requests#index_user_requests'
 

@@ -25,10 +25,6 @@ class RequestsController < ApplicationController
     render json: @requests, status: :ok
     end
 
-  # GET /requests/1
-  def show
-    render json: @request
-  end
 
   # POST /requests
   def create
@@ -36,7 +32,7 @@ class RequestsController < ApplicationController
     @request.user = current_user
 
     if @request.save
-      render json: { message: "Request created successfully" }, status: :created
+      render json: { request: @request, message: "Request created successfully" }, status: :created
     else
       render json: { error: @request.errors }, status: :unprocessable_entity
     end
@@ -50,7 +46,7 @@ class RequestsController < ApplicationController
     end
 
     if @request.update(request_params)
-      render json: { message: "Request updated successfully" }, status: :ok
+      render json: { request: @request, message: "Request updated successfully" }, status: :ok
     else
       render json: @request.errors, status: :unprocessable_entity
     end

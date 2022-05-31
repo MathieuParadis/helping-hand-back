@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe 'User registration', type: :request do
   describe 'POST /create' do
 
-
     context 'with valid parameters' do
 
       before do
