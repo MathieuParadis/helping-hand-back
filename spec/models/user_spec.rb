@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   before (:all) do
-    @user = FactoryBot.build(:user)
+    @position = FactoryBot.build(:position)
+    @user = FactoryBot.build(:user, position: @position)
   end
 
   after (:all) do
@@ -12,6 +13,11 @@ RSpec.describe User, type: :model do
 
   it "is valid with valid attributes" do
     expect(@user).to be_valid
+  end
+
+  it "is valid without position" do
+    user = FactoryBot.build(:user, position: nil)
+    expect(user).to be_valid
   end
 
   it "is not valid without first name" do

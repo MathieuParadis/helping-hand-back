@@ -1,15 +1,11 @@
 class ChatsController < ApplicationController
+  before_action :authorized
 
   def index
     chats = Chat.where(requester: current_user) + Chat.where(volunteer: current_user)
     chats = chats.sort{ |a, b| b.messages.last.updated_at <=> a.messages.last.updated_at }
     render json: chats
   end
-
-  # def index
-  #   chats = Chat.all
-  #   render json: chats
-  # end
 
   def create
     chat = Chat.new(chat_params)
