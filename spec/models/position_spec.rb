@@ -50,5 +50,4 @@ RSpec.describe Position, type: :model do
     position = FactoryBot.build(:position, lng: 181)
     expect(position).to_not be_valid
   end
-
 end
