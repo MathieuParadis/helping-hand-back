@@ -15,8 +15,7 @@ class MessagesController < ApplicationController
       MessagesChannel.broadcast_to chat, serialized_message
       render json: message, status: :created
     else 
-      # render json: { error: "An error occured. Please try again!" }, status: :unprocessable_entity
-      render json: { error: message.errors}, status: :unprocessable_entity
+      render json: { error: "An error occured. Please try again!" }, status: :unprocessable_entity
     end
   end
 
