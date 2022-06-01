@@ -5,5 +5,9 @@ class Message < ApplicationRecord
 
   # Validations
   validates :content, presence: true
+  validates :read_status, presence: true
+
+  # Read status options
+  enum read_status: { unread: "unread", read: "read" }
 
 end

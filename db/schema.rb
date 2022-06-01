@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2022_05_23_001233) do
 
   create_table "messages", force: :cascade do |t|
     t.string "content"
+    t.string "read_status", default: "unread"
     t.bigint "chat_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false

@@ -7,6 +7,7 @@ class Chat < ApplicationRecord
 
   # Methods
   after_create :first_message, :chat_created, :increment_request_count
+
   def first_message
     Message.create(content: "Hello #{self.requester.first_name}", chat: self, user: self.volunteer)
   end
