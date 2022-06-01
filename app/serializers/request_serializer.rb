@@ -1,5 +1,4 @@
 class RequestSerializer < ActiveModel::Serializer
-  
   attributes :id, :title, :request_type, :location, :lat, :lng, :description, :status, :count, :user, :publish_date
 
   def lat
@@ -17,4 +16,5 @@ class RequestSerializer < ActiveModel::Serializer
   def publish_date
     object.created_at.to_s(:db)[0..9]
   end
+  
 end

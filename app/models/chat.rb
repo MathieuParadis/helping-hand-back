@@ -15,4 +15,5 @@ class Chat < ApplicationRecord
   def chat_created
     ChatMailer.new_chat_email(self).deliver_now
   end
+  
 end
