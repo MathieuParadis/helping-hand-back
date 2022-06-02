@@ -127,7 +127,7 @@ Request.create(
   title: "Need old tennis balls",
   request_type: "material",
   location: "Boulder",
-  lat: 40.05,
+  lat: 40.15,
   lng: -105.14,
   description: "Looking for old tennis balls to use to play with my dogs.",
   user_id: User.all.sample.id
