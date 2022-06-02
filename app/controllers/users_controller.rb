@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, except: %i[create index login]
+  before_action :authorized, except: %i[create login]
   before_action :set_user, except: %i[create login index]
 
   # GET /users
