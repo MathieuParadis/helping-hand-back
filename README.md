@@ -32,4 +32,4 @@ Then, access the app in your browser at http://localhost:3000/
 End points of the app in production
 * [Users](https://helpping-hand-back.herokuapp.com/users)
 * [Requests](https://helpping-hand-back.herokuapp.com/requests)
-
+* [chats](https://helpping-hand-back.herokuapp.com/chats)
