@@ -11,7 +11,7 @@ test:
 
 production:
   adapter: redis
-  url: redistogo-regular-13583
+  url: redis://redistogo:912c6746319f1095bc37b34ec5cd7b61@porgy.redistogo.com:10262/
 #   channel_prefix: helping-hand-backend_production
 
 # production:
