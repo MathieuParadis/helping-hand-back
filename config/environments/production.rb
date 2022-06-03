@@ -84,7 +84,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Mailer
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => "helpping-hand.herokuapp.com" }
 
   Rails.application.routes.default_url_options[:host] = 'helpping-hand-back.herokuapp.com'
