@@ -32,7 +32,7 @@ class Request < ApplicationRecord
   after_update :request_expired, :request_fulfilled
 
   def set_expiry_date
-    self.expiry_date ||= Integer(Time.current.utc) + (86400*3)
+    self.expiry_date ||= Integer(Time.current.utc) + (86400)
   end
 
   def request_created
