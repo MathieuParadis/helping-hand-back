@@ -1,7 +1,7 @@
 # This repository is the back of the Helping Hand app: [Helping Hand](https://helpping-hand.herokuapp.com/)
 
 ## Description :
-Helping Hand is a local charity whose mission is to help to build a strong community by promoting the good. We aim to educate, and inspire people to embrace kindness and charitable giving, and in doing so, be the change they want to be in the world. To achieved this goal, we have developed a plateform to help connecting people in need with volunteers within the community. We believe that by making it easier for people to give and reach out to help those less fortunate than themselves, they will feel empowered and are more likely to volunteer.
+Helping Hand is a local charity whose mission is to help to build a strong community by promoting the good. We aim to educate, and inspire people to embrace kindness and charitable giving, and in doing so, be the change they want to see in the world. To achieved this goal, we have developed a plateform to help connecting people in need with volunteers within the community. We believe that by making it easier for people to give and reach out to help those less fortunate than themselves, they will feel empowered and are more likely to volunteer.
 
 
 ## Developpers:
