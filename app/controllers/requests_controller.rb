@@ -9,7 +9,7 @@ class RequestsController < ApplicationController
     lng = params[:lng]
 
     @requests = Request.where(status: "in_progress").where("count < ?", 5)
-    @requests = @requests.within(15, :origin => [lat, lng])
+    @requests = @requests.within(5, :origin => [lat, lng])
 
     render json: @requests, status: :ok
   end
