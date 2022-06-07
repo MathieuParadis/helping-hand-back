@@ -81,7 +81,9 @@ class RequestsController < ApplicationController
 
     # Check the status of the requests and change them to expired if expiry date is passed
     def check_status
-      Request.all.each do |request|
+      @requests = Request.where(status: "in_progress")
+
+      @requests.all.each do |request|
         if request.is_request_expired()
           request.status = "expired"
         end
