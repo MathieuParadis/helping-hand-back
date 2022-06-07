@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :update, :destroy]
   before_action :authorized
-  before_action :check_status
+  before_action :check_status, only: [:index, :index_user_requests]
 
   # GET /requests
   def index
