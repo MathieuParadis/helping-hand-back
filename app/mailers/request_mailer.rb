@@ -1,7 +1,8 @@
 class RequestMailer < ApplicationMailer
   def request_created_email(request)
     @request = request
-    @url  = 'https://helpping-hand.herokuapp.com/my-requests/' 
+    # @url  = 'https://helpping-hand.herokuapp.com/my-requests/'
+    @url  = 'http://localhost:3000/my-requests/'
     mail(to: @request.user.email, subject: "Your new request '#{@request.title}' is online")
   end
 

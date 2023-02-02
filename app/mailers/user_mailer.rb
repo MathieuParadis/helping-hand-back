@@ -1,13 +1,15 @@
 class UserMailer < ApplicationMailer
   def welcome_email(user)
     @user = user
-    @url  = 'https://helpping-hand.herokuapp.com/signin/' 
+    # @url  = 'https://helpping-hand.herokuapp.com/signin/'
+    @url  = 'http://localhost:3000/signin/'
     mail(to: @user.email, subject: 'Welcome to Helping Hand')
   end
 
   def reset_password_email(user)
     @user = user 
-    @url ="https://helpping-hand.herokuapp.com/reset-password/#{user.reset_password_token}"
+    # @url ="https://helpping-hand.herokuapp.com/reset-password/#{user.reset_password_token}"
+    @url ="http://localhost:3000/reset-password/#{user.reset_password_token}"
     mail(to: @user.email, subject: "Reset your password (Helping Hand)") 
   end
 
